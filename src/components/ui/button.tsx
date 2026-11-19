@@ -1,48 +1,52 @@
-import { Button as ButtonPrimitive } from "@base-ui/react/button"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "cn"
+'use client';
+
+import { Button as ButtonPrimitive } from '@base-ui/react/button';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  'group/button inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 border border-transparent bg-clip-padding whitespace-nowrap select-none transition-transform duration-150 active:scale-95 disabled:pointer-events-none disabled:opacity-45 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4',
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/80",
-        outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+        default:
+          'rounded-full bg-[var(--apple-primary)] text-[var(--apple-on-primary)] font-normal hover:brightness-95',
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          'rounded-full border-[var(--apple-primary)] bg-transparent text-[var(--apple-primary)] font-normal hover:bg-[var(--apple-primary)]/8',
+        dark: 'rounded-[8px] bg-[var(--apple-ink)] text-[var(--apple-on-dark)] font-normal hover:bg-[#333333]',
+        pearl:
+          'rounded-[11px] border-[3px] border-[var(--apple-divider-soft)] bg-[var(--apple-surface-pearl)] text-[var(--apple-ink-muted-80)] font-normal hover:bg-[var(--apple-canvas-parchment)]',
+        outline:
+          'rounded-full border-[var(--apple-hairline)] bg-[var(--apple-canvas)] text-[var(--apple-ink)] font-normal hover:bg-[var(--apple-canvas-parchment)]',
         ghost:
-          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+          'rounded-full bg-transparent text-[var(--apple-ink)] font-normal hover:bg-[var(--apple-divider-soft)]',
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-primary underline-offset-4 hover:underline",
+          'rounded-full bg-[#c92a2a] text-white font-normal hover:bg-[#a61e1e]',
+        'destructive-outline':
+          'rounded-full border-[#c92a2a]/35 bg-transparent text-[#c92a2a] font-normal hover:bg-[#c92a2a]/8',
+        link: 'rounded-sm bg-transparent p-0 text-[var(--apple-primary)] underline-offset-4 hover:underline',
+        circular:
+          'rounded-full bg-[rgb(210_210_215_/_0.64)] text-[var(--apple-ink)] hover:bg-[rgb(210_210_215_/_0.88)]',
       },
       size: {
-        default:
-          "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        icon: "size-8",
-        "icon-xs":
-          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm":
-          "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
-        "icon-lg": "size-9",
+        default: 'min-h-11 px-[22px] py-[11px] text-[17px] leading-[1.24] tracking-[-0.374px]',
+        sm: 'min-h-11 px-[15px] py-2 text-[14px] leading-[1.29] tracking-[-0.224px]',
+        compact: 'min-h-9 px-3.5 py-1.5 text-[14px] leading-[1.29] tracking-[-0.224px]',
+        lg: 'min-h-12 px-7 py-3.5 text-[18px] font-light leading-none tracking-normal',
+        icon: 'min-h-11 min-w-11 size-11 p-0',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
-  }
-)
+  },
+);
 
 function Button({
   className,
-  variant = "default",
-  size = "default",
+  variant = 'default',
+  size = 'default',
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
   return (
@@ -51,7 +55,7 @@ function Button({
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
-  )
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };
