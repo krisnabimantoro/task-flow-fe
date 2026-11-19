@@ -3,6 +3,7 @@
 import { AlertCircle, Loader2 } from 'lucide-react';
 import { useId, useRef, useState, type FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
+import { DateTimePicker } from '@/components/ui/date-time-picker';
 import {
   Dialog,
   DialogBody,
@@ -364,18 +365,15 @@ function TaskFormDialogInner({
                 >
                   Optional local date and time.
                 </p>
-                <Input
+                <DateTimePicker
                   id={dueDateId}
-                  name="dueDate"
-                  type="datetime-local"
                   value={dueDate}
-                  onChange={(event) => {
-                    setDueDate(event.target.value);
+                  onChange={(nextValue) => {
+                    setDueDate(nextValue);
                     if (showDiscardConfirm) setShowDiscardConfirm(false);
                   }}
-                  aria-invalid="false"
-                  aria-describedby={dueDateHintId}
-                  className="text-[14px] tracking-[-0.224px]"
+                  ariaDescribedBy={dueDateHintId}
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
